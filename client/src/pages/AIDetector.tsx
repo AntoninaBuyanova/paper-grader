@@ -6,6 +6,7 @@ import AIDetectionFeatures from '../components/ai-detection/AIDetectionFeatures'
 import AIDetectionBenefits from '../components/ai-detection/AIDetectionBenefits';
 import AIDetectionComparison from '../components/ai-detection/AIDetectionComparison';
 import AIDetectionFAQ from '../components/ai-detection/AIDetectionFAQ';
+import AIDetectionDescription from '../components/ai-detection/AIDetectionDescription';
 
 const AIDetector: React.FC = () => {
   useEffect(() => {
@@ -66,6 +67,10 @@ const AIDetector: React.FC = () => {
 
       {/* Main Content */}
       <main>
+        <div id="description">
+          <AIDetectionDescription />
+        </div>
+
         <div id="features">
           <AIDetectionFeatures />
         </div>

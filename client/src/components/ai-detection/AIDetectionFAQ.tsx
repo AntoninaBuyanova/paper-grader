@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 
 const AIDetectionFAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState(0);
+  // Initialize with all indexes as open (array of true values)
+  const [openStates, setOpenStates] = useState<boolean[]>(Array(5).fill(true));
+
+  const toggleFAQ = (index: number) => {
+    setOpenStates(prev => {
+      const newStates = [...prev];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
+  };
 
   const faqItems = [
     {
@@ -33,24 +42,34 @@ const AIDetectionFAQ: React.FC = () => {
           <h2 className="text-[2rem] lg:text-[3.25rem] font-medium leading-[1.2] lg:leading-[3.75rem] mb-12 text-center text-[#232323]">
             Frequently Asked Questions
           </h2>
-          {faqItems.map((item, index) => (
-            <div key={index} className="mb-4">
-              <div 
-                className="flex items-center justify-between p-6 bg-[#F8F8F3] rounded-2xl cursor-pointer"
-                onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
-              >
-                <h3 className="text-xl font-medium text-[#232323]">{item.question}</h3>
-                <button className="text-2xl text-[#232323]">
-                  {openIndex === index ? '×' : '+'}
-                </button>
-              </div>
-              {openIndex === index && (
-                <div className="px-6 py-4 bg-[#F8F8F3] -mt-4 rounded-b-2xl">
-                  <p className="text-[#666666] font-aeonik">{item.answer}</p>
+          <div className="space-y-4">
+            {faqItems.map((item, index) => (
+              <div key={index} className="bg-[#F8F8F3] rounded-2xl overflow-hidden">
+                <div 
+                  className="flex items-center justify-between p-6 cursor-pointer hover:bg-[#F0F0EA] transition-colors duration-200"
+                  onClick={() => toggleFAQ(index)}
+                >
+                  <h3 className="text-xl font-medium text-[#232323] pr-8">{item.question}</h3>
+                  <button className="text-2xl text-[#232323] flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                    {openStates[index] ? '−' : '+'}
+                  </button>
                 </div>
-              )}
-            </div>
-          ))}
+                <div 
+                  className={`transition-all duration-300 ease-in-out ${
+                    openStates[index] 
+                      ? 'max-h-[500px] opacity-100' 
+                      : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="px-6 pb-6">
+                    <p className="text-[#666666] font-aeonik">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

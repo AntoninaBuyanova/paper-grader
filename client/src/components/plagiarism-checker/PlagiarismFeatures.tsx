@@ -28,47 +28,50 @@ const FeatureCard: React.FC<{
   );
 };
 
-const AIDetectionFeatures: React.FC = () => {
+const PlagiarismFeatures: React.FC = () => {
   const features = [
     {
       icon: <Shield className="w-6 h-6 text-[#232323]" />,
-      title: "AI Detection Tools for Teachers",
-      description: "Comprehensive suite of AI detection tools designed specifically for educational professionals.",
+      title: "Advanced Plagiarism Detection",
+      description: "Comprehensive plagiarism detection system powered by AI technology.",
       benefits: [
-        "AI detection checker for content analysis",
-        "AI detection for plagiarism checks",
-        "AIGC detection capabilities"
+        "Detect plagiarism and AI text with advanced algorithms",
+        "Find out plagiarism in academic papers",
+        "Real-time scanning and instant results",
+        "Check for AI-generated content from ChatGPT"
       ]
     },
     {
       icon: <Search className="w-6 h-6 text-[#232323]" />,
-      title: "Online AI Content Detection",
-      description: "Professional ai detection website with advanced scanning capabilities.",
+      title: "Academic Integrity Tools",
+      description: "Professional plagiarism checker with Turnitin integration.",
       benefits: [
-        "AI detection websites integration",
-        "AI detection site access",
-        "Avoid ai detection tool features"
+        "Integration with Turnitin for verification",
+        "Academic integrity maintenance",
+        "Student submission checker",
+        "Comprehensive plagiarism reports"
       ]
     },
     {
       icon: <FileCheck className="w-6 h-6 text-[#232323]" />,
-      title: "AI Detection for Papers",
-      description: "Specialized tools for academic paper verification and enhancement.",
+      title: "Content Verification",
+      description: "Advanced tools for ensuring content originality and authenticity.",
       benefits: [
-        "AI content detection remover features",
-        "AI detection software for writing",
-        "AI detection remove unwanted markers",
-        "AI detection to human text conversion"
+        "Check academic papers and essays",
+        "Verify student submissions",
+        "Identify potential plagiarism",
+        "Generate originality reports"
       ]
     },
     {
       icon: <RefreshCw className="w-6 h-6 text-[#232323]" />,
-      title: "AI Content Management",
-      description: "Complete solution for handling AI-generated content concerns.",
+      title: "Plagiarism Prevention",
+      description: "Complete solution for preventing and avoiding plagiarism.",
       benefits: [
-        "AI detection and humanizer tools",
-        "Multiple ai detection programs support",
-        "Best ai detection accuracy rates"
+        "Learn how to avoid plagiarism",
+        "Get tips on content originality",
+        "Access plagiarism prevention tools",
+        "Maintain academic standards"
       ]
     }
   ];
@@ -78,11 +81,11 @@ const AIDetectionFeatures: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-[2rem] lg:text-[3.25rem] font-medium leading-[1.2] lg:leading-[3.75rem] mb-4 text-center text-[#232323]">
-              The Most Advanced AI Content Detector
+            <h2 className="text-[2rem] lg:text-[3.25rem] font-medium leading-[1.2] lg:leading-[3.75rem] mb-6 lg:mb-8 text-center text-[#232323]">
+              The Best Way to Instantly Find Plagiarism
             </h2>
             <p className="text-lg md:text-xl text-[#666666] font-aeonik max-w-3xl mx-auto">
-              Advanced tools for comprehensive AI content analysis and verification
+              Advanced tools for comprehensive plagiarism detection and content verification
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
@@ -96,4 +99,4 @@ const AIDetectionFeatures: React.FC = () => {
   );
 };
 
-export default AIDetectionFeatures; 
+export default PlagiarismFeatures; 
