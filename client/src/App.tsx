@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import AIDetector from "@/pages/AIDetector";
 import PlagiarismChecker from './pages/PlagiarismChecker';
 import AIProofreading from './pages/AIProofreading';
+import AIParaphrasing from './pages/AIParaphrasing';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/ai-detector" element={<AIDetector />} />
           <Route path="/plagiarism-checker" element={<PlagiarismChecker />} />
           <Route path="/ai-proofreading" element={<AIProofreading />} />
+          <Route path="/ai-paraphrasing-tool" element={<AIParaphrasing />} />
           {/* Fallback to 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
