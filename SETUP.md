@@ -18,4 +18,4 @@ After installing the dependencies, you can start the development server:
 npm run dev
 ```
 
-The AI Detector page will be available at: http://localhost:5173/ai_detector 
+The AI Detector page will be available at: http://localhost:5173/ai-detector 
