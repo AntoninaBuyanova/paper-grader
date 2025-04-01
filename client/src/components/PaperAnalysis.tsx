@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { AIIcon, PlagiarismIcon } from './icons/Logo';
+import MobileMetrics from './paper-analysis/MobileMetrics';
 
 interface MetricCardProps {
   label: string;
@@ -34,10 +35,6 @@ const MetricCard: React.FC<MetricCardProps> = ({ label, value, description, clas
     </div>
   );
 };
-
-// Ленивая загрузка компонентов метрик для мобильных устройств
-// @ts-ignore - Файл существует, но TypeScript его не видит
-const MobileMetrics = lazy(() => import('./paper-analysis/MobileMetrics'));
 
 const PaperAnalysis: React.FC = () => {
   const aiCardRef = useRef<HTMLDivElement>(null);
@@ -164,12 +161,8 @@ const PaperAnalysis: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile metrics - lazy loaded */}
-        {isMobile && (
-          <Suspense fallback={<div className="p-4 text-center">Loading metrics...</div>}>
-            <MobileMetrics />
-          </Suspense>
-        )}
+        {/* Mobile metrics - прямой импорт вместо ленивой загрузки */}
+        {isMobile && <MobileMetrics />}
       </div>
     </div>
   );
