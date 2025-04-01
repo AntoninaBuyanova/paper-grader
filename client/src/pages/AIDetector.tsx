@@ -36,17 +36,17 @@ const ResourcePreloader: React.FC = () => {
       .ai-detection-hero {
         background-color: white;
         padding-top: 1rem;
-        padding-bottom: 1rem;
+        padding-bottom: 0;
       }
       @media (min-width: 768px) {
         .ai-detection-hero {
           padding-top: 2.5rem;
-          padding-bottom: 2.5rem;
+          padding-bottom: 0;
         }
       }
       .ai-detection-benefits {
         background-color: white;
-        padding: 1.5rem 0;
+        padding: 2.5rem 0;
       }
       @media (min-width: 768px) {
         .ai-detection-benefits {
