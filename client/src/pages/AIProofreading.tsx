@@ -6,11 +6,35 @@ import Testimonials from '@/components/Testimonials';
 import Pricing from '@/components/Pricing';
 import HowItWorks from '@/components/HowItWorks';
 import CTA from '@/components/CTA';
-import ProofreadingChecker from '@/components/ai-proofreading/ProofreadingChecker';
 import ProofreadingHero from '@/components/ai-proofreading/ProofreadingHero';
+import ProofreadingBenefits from '@/components/ai-proofreading/ProofreadingBenefits';
+import ProofreadingDescription from '@/components/ai-proofreading/ProofreadingDescription';
+import ProofreadingFeatures from '@/components/ai-proofreading/ProofreadingFeatures';
+import ProofreadingComparison from '@/components/ai-proofreading/ProofreadingComparison';
+import ProofreadingFAQ from '@/components/ai-proofreading/ProofreadingFAQ';
 
 const AIProofreading: React.FC = () => {
   useEffect(() => {
+    // Update the document title
+    document.title = 'AI Proofreading Tool - Professional Online Editor';
+    
+    // Update meta tags
+    const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
+    const metaKeywords = document.querySelector('meta[name="keywords"]') || document.createElement('meta');
+    
+    metaDescription.setAttribute('name', 'description');
+    metaDescription.setAttribute('content', 'Improve your writing with our AI proofreading tool. Get instant grammar, punctuation, and style corrections with professional editing features.');
+    
+    metaKeywords.setAttribute('name', 'keywords');
+    metaKeywords.setAttribute('content', 'proofreading tool, AI proofreading, online editor, grammar checker, academic proofreading, thesis editing');
+    
+    if (!document.querySelector('meta[name="description"]')) {
+      document.head.appendChild(metaDescription);
+    }
+    if (!document.querySelector('meta[name="keywords"]')) {
+      document.head.appendChild(metaKeywords);
+    }
+
     // Smooth scrolling for anchor links
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLAnchorElement;
@@ -42,7 +66,11 @@ const AIProofreading: React.FC = () => {
       
       <main>
         <ProofreadingHero />
-        <ProofreadingChecker />
+        <ProofreadingBenefits />
+        <ProofreadingDescription />
+        <ProofreadingFeatures />
+        <ProofreadingComparison />
+        <ProofreadingFAQ />
         <Features />
         <Testimonials />
         <Pricing />
