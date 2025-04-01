@@ -10,11 +10,7 @@ export default defineConfig({
   plugins: [
     react(),
     // Добавляем визуализатор размера бандла в режиме production
-    isProduction && visualizer({
-      filename: 'stats.html',
-      gzipSize: true,
-      brotliSize: true,
-    })
+    ...(isProduction ? [{ name: 'rollup-plugin-visualizer' }] : [])
   ],
   build: {
     cssCodeSplit: true,
@@ -100,69 +96,12 @@ export default defineConfig({
     hmr: true,
   },
   css: {
-    // Улучшенная оптимизация CSS
-    postcss: {
-      plugins: [
-        // Импорт других CSS файлов
-        require('postcss-import'),
-        // Tailwind CSS (если используется)
-        require('tailwindcss'),
-        require('autoprefixer'),
-        // PurgeCSS для удаления неиспользуемых стилей
-        isProduction && require('@fullhuman/postcss-purgecss')({
-          content: [
-            './index.html',
-            './src/**/*.{js,jsx,ts,tsx}',
-          ],
-          // Сохраняем важные классы Tailwind и другие динамические классы
-          safelist: [
-            /^font-/,
-            /^bg-/,
-            /^text-/,
-            /^hover:/,
-            /^focus:/,
-            /^lg:/,
-            /^md:/,
-            /^sm:/,
-            /^xl:/,
-            /^h-/,
-            /^w-/,
-            /^m-/,
-            /^p-/,
-            /^border/,
-            /^rounded/,
-            /^flex/,
-            /^grid/,
-            /^transform/,
-            /^transition/,
-            /^animate/,
-            /^shadow/,
-            /^opacity/,
-            'loading-spinner',
-            'container',
-            'font-orbikular',
-            'font-aeonik',
-            'font-inter',
-            'ai-detection-hero',
-            'ai-detection-benefits',
-          ],
-          defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
-        }),
-        // Минификация и оптимизация CSS
-        isProduction && require('cssnano')({
-          preset: ['default', {
-            discardComments: { removeAll: true },
-            normalizeWhitespace: false,
-          }]
-        }),
-      ].filter(Boolean),
-    },
+    postcss: './postcss.config.cjs',
     // Разделение критического и некритического CSS
     modules: {
       generateScopedName: isProduction ? '[hash:base64:8]' : '[local]_[hash:base64:5]',
     },
     // Оптимизация встроенных стилей
     devSourcemap: true,
-    transformer: 'lightningcss',
   },
 }); 
