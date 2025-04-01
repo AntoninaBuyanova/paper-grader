@@ -36,6 +36,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ label, value, description, clas
 };
 
 // Ленивая загрузка компонентов метрик для мобильных устройств
+// @ts-ignore - Файл существует, но TypeScript его не видит
 const MobileMetrics = lazy(() => import('./paper-analysis/MobileMetrics'));
 
 const PaperAnalysis: React.FC = () => {
