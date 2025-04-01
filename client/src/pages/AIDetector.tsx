@@ -35,13 +35,13 @@ const ResourcePreloader: React.FC = () => {
     const criticalStyles = `
       .ai-detection-hero {
         background-color: white;
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
       }
       @media (min-width: 768px) {
         .ai-detection-hero {
-          padding-top: 5rem;
-          padding-bottom: 5rem;
+          padding-top: 2.5rem;
+          padding-bottom: 2.5rem;
         }
       }
       .ai-detection-benefits {
