@@ -45,8 +45,6 @@ const ResourcePreloader: React.FC = () => {
         }
       }
       .ai-detection-benefits {
-        border-top: 1px solid #E8E8E5;
-        border-bottom: 1px solid #E8E8E5;
         background-color: white;
         padding: 1.5rem 0;
       }
