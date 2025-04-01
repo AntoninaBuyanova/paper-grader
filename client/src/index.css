@@ -1,6 +1,11 @@
-@import './fonts/index.css';
+/* Импорт шрифтов через отдельный файл с lazy-loading механизмом */
+@import './fonts/critical-fonts.css';
+
+/* Критические стили - загружаются немедленно */
 @tailwind base;
 @tailwind components;
+
+/* Только самые необходимые утилиты для первоначального отображения */
 @tailwind utilities;
 
 @layer base {
@@ -18,5 +23,29 @@
 
   h2, h3, h4, h5, h6 {
     @apply font-aeonik;
+  }
+}
+
+/* Для выявления проблем с загрузкой шрифтов */
+.fonts-loading body {
+  opacity: 0.99;
+}
+
+.fonts-loaded body {
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+/* 
+  Некритические стили загружаются через JavaScript 
+  Это будет динамически подгружаться после основного рендеринга 
+*/
+:root {
+  --animation-duration: 0.3s;
+}
+
+@media (prefers-reduced-motion) {
+  :root {
+    --animation-duration: 0s;
   }
 }

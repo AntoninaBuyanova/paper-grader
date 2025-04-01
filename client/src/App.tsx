@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import { lazy, Suspense } from 'react';
+import StyleLoader from '@/components/StyleLoader';
 
 // Заменяем прямые импорты на ленивую загрузку
 const Home = lazy(() => import("@/pages/Home"));
@@ -22,6 +23,9 @@ const LoadingFallback = () => (
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      {/* Компонент для оптимизации загрузки стилей */}
+      <StyleLoader />
+      
       <Router>
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
