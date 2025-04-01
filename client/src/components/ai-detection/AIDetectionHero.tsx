@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { AIIcon } from '../icons/Logo';
-import PaperAnalysis from '../PaperAnalysis';
+
+// Ленивая загрузка тяжелого компонента PaperAnalysis
+const PaperAnalysis = lazy(() => import('../PaperAnalysis'));
 
 const AIDetectionHero: React.FC = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  // Эффект для гидратации на стороне клиента
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <section className="pt-6 pb-6 md:pt-20 md:pb-0 overflow-hidden bg-[#FFFFFF]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,9 +46,17 @@ const AIDetectionHero: React.FC = () => {
             </a>
           </div>
 
-          {/* Paper Analysis Component */}
+          {/* Paper Analysis Component - ленивая загрузка */}
           <div className="hidden sm:block">
-            <PaperAnalysis />
+            {isClient && (
+              <Suspense fallback={
+                <div className="w-full h-[460px] flex items-center justify-center">
+                  <div className="w-12 h-12 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
+                </div>
+              }>
+                <PaperAnalysis />
+              </Suspense>
+            )}
           </div>
         </div>
       </div>

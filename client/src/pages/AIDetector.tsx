@@ -13,6 +13,76 @@ import AIDetectionComparison from '../components/ai-detection/AIDetectionCompari
 import AIDetectionFAQ from '../components/ai-detection/AIDetectionFAQ';
 import AIDetectionDescription from '../components/ai-detection/AIDetectionDescription';
 
+// Компонент предзагрузки критических ресурсов
+const ResourcePreloader: React.FC = () => {
+  useEffect(() => {
+    // Предзагрузка критических изображений для страницы AI-detector
+    const preloadImages = [
+      '/users.png',  // Изображение с аватарами пользователей
+      '/ai-detector-hero.webp', // Главное изображение hero секции (если есть)
+    ];
+    
+    preloadImages.forEach(src => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      link.type = 'image/webp';
+      document.head.appendChild(link);
+    });
+    
+    // Добавление критических стилей для AI-detector
+    const criticalStyles = `
+      .ai-detection-hero {
+        background-color: white;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+      @media (min-width: 768px) {
+        .ai-detection-hero {
+          padding-top: 5rem;
+          padding-bottom: 5rem;
+        }
+      }
+      .ai-detection-benefits {
+        border-top: 1px solid #E8E8E5;
+        border-bottom: 1px solid #E8E8E5;
+        background-color: white;
+        padding: 1.5rem 0;
+      }
+      @media (min-width: 768px) {
+        .ai-detection-benefits {
+          padding: 2.5rem 0;
+        }
+      }
+    `;
+    
+    // Вставка критических стилей
+    if (!document.querySelector('#ai-detector-critical-css')) {
+      const style = document.createElement('style');
+      style.id = 'ai-detector-critical-css';
+      style.innerHTML = criticalStyles;
+      document.head.appendChild(style);
+    }
+    
+    // Оптимизация загрузки шрифтов
+    document.documentElement.classList.add('fonts-loading');
+    
+    if ('fonts' in document) {
+      Promise.all([
+        (document as any).fonts.load('1em "Aeonik Pro"'),
+        (document as any).fonts.load('1em "Orbikular"'),
+        (document as any).fonts.load('1em "Inter"')
+      ]).then(() => {
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-loaded');
+      });
+    }
+  }, []);
+  
+  return null;
+};
+
 const AIDetector: React.FC = () => {
   useEffect(() => {
     // Update the document title
@@ -62,13 +132,20 @@ const AIDetector: React.FC = () => {
 
   return (
     <div className="bg-slate-50 text-slate-800 font-sans antialiased">
+      {/* Предзагрузка критических ресурсов */}
+      <ResourcePreloader />
+      
       <Header />
       
-      {/* Hero Section */}
-      <AIDetectionHero />
+      {/* Hero Section с дополнительным классом для критических стилей */}
+      <section className="ai-detection-hero">
+        <AIDetectionHero />
+      </section>
 
-      {/* Benefits Section with Logo Cloud style */}
-      <AIDetectionBenefits />
+      {/* Benefits Section с дополнительным классом для критических стилей */}
+      <section className="ai-detection-benefits">
+        <AIDetectionBenefits />
+      </section>
 
       {/* Main Content */}
       <main>
