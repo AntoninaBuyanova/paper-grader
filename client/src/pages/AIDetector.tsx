@@ -46,11 +46,13 @@ const ResourcePreloader: React.FC = () => {
       }
       .ai-detection-benefits {
         background-color: white;
-        padding: 2.5rem 0;
+        padding: 0;
+        border-top: none;
+        border-bottom: none;
       }
       @media (min-width: 768px) {
         .ai-detection-benefits {
-          padding: 2.5rem 0;
+          padding: 0;
         }
       }
     `;
@@ -141,7 +143,7 @@ const AIDetector: React.FC = () => {
       </section>
 
       {/* Benefits Section с дополнительным классом для критических стилей */}
-      <section className="ai-detection-benefits border-t border-b border-[#E8E8E5]">
+      <section className="ai-detection-benefits">
         <AIDetectionBenefits />
       </section>
 
