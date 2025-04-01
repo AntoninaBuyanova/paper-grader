@@ -54,9 +54,11 @@ const PlagiarismComparison: React.FC = () => {
               </div>
             </div>
 
-            <button className="w-full lg:w-auto py-4 lg:py-[1.125rem] px-6 lg:px-[3.75rem] bg-[#232323] text-white rounded-full text-lg lg:text-[1.25rem] font-medium font-aeonik">
-              <a href="https://mystylus.ai/paper-grader/" className="text-white no-underline">Check for Plagiarism</a>
-            </button>
+            <a href="https://mystylus.ai/paper-grader/" className="no-underline">
+              <button className="w-full lg:w-auto py-4 lg:py-[1.125rem] px-6 lg:px-[3.75rem] bg-[#232323] text-white rounded-full text-lg lg:text-[1.25rem] font-medium font-aeonik">
+                Check for Plagiarism
+              </button>
+            </a>
           </div>
         </div>
       </div>

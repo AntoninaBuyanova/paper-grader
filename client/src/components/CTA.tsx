@@ -65,9 +65,11 @@ const CTA: React.FC = () => {
           <p className="text-[#3C3C3C] mb-6 lg:mb-10 text-base lg:text-[1.25rem] leading-normal lg:leading-[1.75rem]">
             Get detailed feedback and make meaningful improvements — in minutes
           </p>
-          <button className="w-full md:max-w-[400px] lg:w-auto px-6 lg:px-[3.75rem] py-4 lg:py-[1.125rem] bg-[#232323] text-white rounded-full text-base lg:text-[1.25rem] font-medium mx-auto md:mx-auto">
-            <a href="https://mystylus.ai/paper-grader/" className="text-white no-underline">Enhance my paper</a>
-          </button>
+          <a href="https://mystylus.ai/paper-grader/" className="no-underline">
+            <button className="w-full md:max-w-[400px] lg:w-auto px-6 lg:px-[3.75rem] py-4 lg:py-[1.125rem] bg-[#232323] text-white rounded-full text-base lg:text-[1.25rem] font-medium mx-auto md:mx-auto">
+              Enhance my paper
+            </button>
+          </a>
         </div>
       </div>
     </section>

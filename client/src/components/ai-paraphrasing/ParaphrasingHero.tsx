@@ -30,9 +30,11 @@ const ParaphrasingHero: React.FC = () => {
             The best AI paraphrasing tool to rephrase your text. Transform AI-generated content into human-like writing instantly.
           </p>
           <div className="flex justify-center mb-0 md:mb-12">
-            <button className="w-[280px] md:w-auto px-6 md:px-[3.75rem] py-3 md:py-[1.125rem] bg-[#232323] text-white rounded-full text-base md:text-[20px] font-aeonik font-medium">
-              <a href="https://mystylus.ai/paper-grader/" className="text-white no-underline">Try Paraphrasing Tool</a>
-            </button>
+            <a href="https://mystylus.ai/paper-grader/" className="no-underline">
+              <button className="w-[280px] md:w-auto px-6 md:px-[3.75rem] py-3 md:py-[1.125rem] bg-[#232323] text-white rounded-full text-base md:text-[20px] font-aeonik font-medium">
+                Try Paraphrasing Tool
+              </button>
+            </a>
           </div>
 
           {/* Paper Analysis Component */}

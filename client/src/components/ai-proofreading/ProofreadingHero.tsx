@@ -30,9 +30,11 @@ const ProofreadingHero: React.FC = () => {
             Advanced AI proofreading tool to check and correct grammar, spelling, and style. Make your writing flawless in seconds.
           </p>
           <div className="flex justify-center mb-0 md:mb-12">
-            <button className="w-[280px] md:w-auto px-6 md:px-[3.75rem] py-3 md:py-[1.125rem] bg-[#232323] text-white rounded-full text-base md:text-[20px] font-aeonik font-medium">
-              <a href="https://mystylus.ai/paper-grader/" className="text-white no-underline">Proofread My Text</a>
-            </button>
+            <a href="https://mystylus.ai/paper-grader/" className="no-underline">
+              <button className="w-[280px] md:w-auto px-6 md:px-[3.75rem] py-3 md:py-[1.125rem] bg-[#232323] text-white rounded-full text-base md:text-[20px] font-aeonik font-medium">
+                Proofread My Text
+              </button>
+            </a>
           </div>
 
           {/* Paper Analysis Component */}
