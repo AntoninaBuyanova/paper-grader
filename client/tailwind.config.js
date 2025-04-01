@@ -15,9 +15,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        aeonik: ['var(--font-aeonik)'],
-        orbikular: ['var(--font-orbikular)'],
-        inter: ['var(--font-inter)'],
+        sans: ['var(--font-aeonik)'],
+        aeonik: ['Aeonik Pro', 'Aeonik Pro Fallback', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        orbikular: ['Orbikular', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        inter: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

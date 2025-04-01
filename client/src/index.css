@@ -18,11 +18,19 @@
   }
 
   h1 {
-    @apply font-orbikular;
+    @apply font-orbikular font-normal;
+  }
+  
+  h1 em {
+    @apply font-orbikular italic;
   }
 
   h2, h3, h4, h5, h6 {
     @apply font-aeonik;
+  }
+
+  button, a.btn {
+    @apply font-aeonik font-medium;
   }
 }
 
