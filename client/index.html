@@ -16,7 +16,13 @@
   <link rel="preload" href="/src/fonts/Orbikular (1).ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="/src/fonts/Orbikular-Variable-Italic-VF.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="/src/fonts/aeonikpro-regular.otf" as="font" type="font/otf" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  
+  <!-- Preload Google Fonts CSS -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  </noscript>
   
   <!-- Critical CSS inline for faster first paint -->
   <style>
@@ -74,10 +80,15 @@
       color: #334155;
     }
     
+    /* Prevent FOUC (Flash of Unstyled Content) */
     #root {
-      min-height: 100vh;
-      opacity: 1;
+      opacity: 0;
       transition: opacity 0.5s ease;
+    }
+    
+    /* When fonts are loaded, show content smoothly */
+    .fonts-loaded #root {
+      opacity: 1;
     }
     
     /* Класс для Aeonik Pro */
@@ -95,13 +106,50 @@
       font-family: var(--font-inter);
     }
     
-    /* Основные классы для заголовков и текста */
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 0;
+    /* Critical hero styles */
+    .hero {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      background-color: white;
     }
     
-    p {
+    @media (min-width: 768px) {
+      .hero {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+    }
+    
+    /* Critical container styles */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    /* Critical header styles */
+    header {
+      width: 100%;
+      background-color: white;
+      border-bottom: 1px solid #F2F2ED;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    /* Critical text styles */
+    h1 {
       margin-top: 0;
+      font-family: var(--font-orbikular);
+      font-weight: normal;
+    }
+    
+    h1 em {
+      font-family: var(--font-orbikular);
+      font-style: italic;
     }
     
     /* Загрузочный спиннер */
@@ -123,47 +171,10 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    
-    /* Критический CSS для layout структуры страниц */
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-    
-    /* Базовые стили для header */
-    header {
-      width: 100%;
-      background-color: white;
-      border-bottom: 1px solid #F2F2ED;
-    }
-    
-    /* Базовые стили для hero секции */
-    .hero {
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
-      background-color: white;
-    }
-    
-    @media (min-width: 768px) {
-      .hero {
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-      }
-    }
   </style>
   
   <link rel="icon" type="image/png" href="/Favicon (1).png">
   <meta name="description" content="myStylus helps you craft perfect content by analyzing your text and providing real-time suggestions to enhance your writing style, clarity, and impact." />
-  
-  <!-- Асинхронная загрузка шрифтов Google Fonts с приоритетом FCP -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-  </noscript>
 </head>
 <body>
   <div id="root">
@@ -178,41 +189,70 @@
   <script>
     // Функция для отложенной загрузки аналитики
     function loadGoogleAnalytics() {
-      const script = document.createElement('script');
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9190SYNDV7';
-      script.async = true;
-      document.body.appendChild(script);
-      
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-9190SYNDV7', {
-        'send_page_view': false, // Отложенная отправка события просмотра
-        'page_location': window.location.href, // Включаем полный URL
-        'cookie_flags': 'SameSite=None;Secure' // Безопасные куки
-      });
-      
-      // Отправка page_view после загрузки страницы
-      if (document.readyState === 'complete') {
-        gtag('event', 'page_view');
-      } else {
-        window.addEventListener('load', function() {
-          setTimeout(function() {
-            gtag('event', 'page_view');
-          }, 100);
+      if (navigator.sendBeacon) {
+        // Use newer Beacon API if available
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9190SYNDV7';
+        script.async = true;
+        document.body.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9190SYNDV7', {
+          'send_page_view': false,
+          'page_location': window.location.href,
+          'cookie_flags': 'SameSite=None;Secure'
         });
+        
+        // Отправка page_view после загрузки страницы
+        if (document.readyState === 'complete') {
+          gtag('event', 'page_view');
+        } else {
+          window.addEventListener('load', function() {
+            setTimeout(function() {
+              gtag('event', 'page_view');
+            }, 100);
+          });
+        }
       }
     }
     
-    // Стратегия отложенной загрузки аналитики
-    if (navigator.onLine) {
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadGoogleAnalytics, { timeout: 5000 });
-      } else {
-        setTimeout(loadGoogleAnalytics, 1000);
-      }
+    // Стратегия отложенной загрузки аналитики - load after important content
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadGoogleAnalytics, { timeout: 5000 });
     } else {
-      window.addEventListener('online', loadGoogleAnalytics);
+      // Fallback - load after page becomes interactive
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(loadGoogleAnalytics, 3000);
+      });
+    }
+  </script>
+  
+  <script>
+    // Add fonts-loading class immediately
+    document.documentElement.classList.add('fonts-loading');
+    
+    // FontFaceObserver equivalent - watch for font loading
+    if ('fonts' in document) {
+      Promise.all([
+        document.fonts.load('1em "Aeonik Pro"'),
+        document.fonts.load('1em "Orbikular"'),
+        document.fonts.load('1em "Inter"')
+      ]).then(() => {
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-loaded');
+      }).catch(() => {
+        // If font loading failed, still show content
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-loaded');
+      });
+    } else {
+      // Fallback for browsers that don't support font loading API
+      setTimeout(() => {
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-loaded');
+      }, 300);
     }
   </script>
 </body>

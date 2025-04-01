@@ -14,6 +14,7 @@ export default defineConfig({
   ],
   build: {
     cssCodeSplit: true,
+    cssMinify: true,
     minify: 'terser', // Более эффективная минификация с помощью terser
     terserOptions: {
       compress: {
@@ -22,27 +23,27 @@ export default defineConfig({
       }
     },
     // Включаем CSS-оптимизацию
-    cssMinify: 'lightningcss',
     rollupOptions: {
       output: {
-        // Более детальное разделение кода
         manualChunks: (id) => {
+          // Split code into logical chunks
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'vendor-react';
+          }
+          
+          if (id.includes('node_modules/')) {
+            return 'vendor';
+          }
+          
+          if (id.includes('/components/')) {
+            return 'components';
+          }
+          
           // Критический путь - компоненты, необходимые при первой загрузке
           if (id.includes('/components/HeroSection') || 
               id.includes('/components/Header') || 
               id.includes('/components/Footer')) {
             return 'critical';
-          }
-          
-          // React и React DOM в отдельном чанке
-          if (id.includes('node_modules/react') || 
-              id.includes('node_modules/react-dom')) {
-            return 'react-vendor';
-          }
-          
-          // UI компоненты в отдельном чанке
-          if (id.includes('/components/ui')) {
-            return 'ui-components';
           }
           
           // Разделение по страницам и разделам
@@ -58,9 +59,9 @@ export default defineConfig({
           if (id.includes('/components/ai-proofreading')) return 'ai-proofreading';
           if (id.includes('/components/plagiarism-checker')) return 'plagiarism-checker';
           
-          // Дополнительные библиотеки в отдельном чанке
-          if (id.includes('node_modules/')) {
-            return 'vendor';
+          // UI компоненты в отдельном чанке
+          if (id.includes('/components/ui')) {
+            return 'ui-components';
           }
         },
         // Настройка именования файлов
@@ -68,12 +69,16 @@ export default defineConfig({
         chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name || '';
-          if (info.endsWith('.ttf') || info.endsWith('.otf')) {
-            return 'assets/fonts/[name][extname]';
-          }
           if (info.endsWith('.css')) {
             return 'assets/[name]-[hash][extname]';
           }
+          
+          // For fonts and images
+          if (info.endsWith('.ttf') || info.endsWith('.otf') || 
+              info.endsWith('.woff') || info.endsWith('.woff2')) {
+            return 'assets/fonts/[name][extname]';
+          }
+          
           return 'assets/[name]-[hash][extname]';
         },
       }
