@@ -32,7 +32,7 @@ const HeroSection: React.FC = () => {
           </p>
           <div className="flex justify-center mb-0 md:mb-12">
             <button className="w-[280px] md:w-auto px-6 md:px-[3.75rem] py-3 md:py-[1.125rem] bg-[#232323] text-white rounded-full text-base md:text-[20px] font-aeonik font-medium">
-              Enhance my paper
+              <a href="https://mystylus.ai/paper-grader/" className="text-white no-underline">Enhance my paper</a>
             </button>
           </div>
 

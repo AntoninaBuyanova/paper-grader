@@ -58,7 +58,7 @@ const ParaphrasingDescription: React.FC = () => {
           
           <div className="mt-12 text-center">
             <button className="bg-[#232323] text-white py-4 px-8 rounded-full text-lg font-medium hover:bg-[#3C3C3C] transition-colors duration-300">
-              Try Our Paraphrasing Tool
+              <a href="https://mystylus.ai/paper-grader/" className="text-white no-underline">Try Our Paraphrasing Tool</a>
             </button>
           </div>
         </div>

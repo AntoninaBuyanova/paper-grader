@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Features from '@/components/Features';
+import Testimonials from '@/components/Testimonials';
+import Pricing from '@/components/Pricing';
+import HowItWorks from '@/components/HowItWorks';
+import CTA from '@/components/CTA';
 import AIDetectionHero from '../components/ai-detection/AIDetectionHero';
 import AIDetectionFeatures from '../components/ai-detection/AIDetectionFeatures';
 import AIDetectionBenefits from '../components/ai-detection/AIDetectionBenefits';
@@ -73,16 +78,23 @@ const AIDetector: React.FC = () => {
 
         <div id="features">
           <AIDetectionFeatures />
+          <Features />
         </div>
         
         <div id="comparison">
           <AIDetectionComparison />
         </div>
 
+        <Testimonials />
+        <Pricing />
+        <HowItWorks />
+
         {/* FAQ Section */}
         <div id="faq">
           <AIDetectionFAQ />
         </div>
+
+        <CTA />
       </main>
 
       <Footer />
