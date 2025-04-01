@@ -6,9 +6,11 @@
   <title>myStylus - Grade and Enhance
     Paper in Minutes</title>
   
-  <!-- Preconnect to Google Fonts -->
+  <!-- Preconnect to external resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
   
   <!-- Preload critical fonts -->
   <link 
@@ -71,6 +73,8 @@
     
     #root {
       min-height: 100vh;
+      opacity: 1;
+      transition: opacity 0.5s ease;
     }
     
     .font-aeonik {
@@ -79,6 +83,26 @@
     
     .font-orbikular {
       font-family: var(--font-orbikular);
+    }
+    
+    /* Loading animation */
+    .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #232323;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -24px;
+      margin-left: -24px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
   
@@ -100,16 +124,51 @@
   </noscript>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Fallback content during initial load -->
+    <div class="loading-spinner"></div>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
   
-  <!-- Google Analytics moved to end of body -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9190SYNDV7"></script>
+  <!-- Google Analytics with delayed and async loading -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9190SYNDV7');
+    // Функция для отложенной загрузки Google Analytics
+    function loadGoogleAnalytics() {
+      const script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9190SYNDV7';
+      script.async = true;
+      document.body.appendChild(script);
+      
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9190SYNDV7', {
+        'send_page_view': false // Откладываем отправку page_view
+      });
+      
+      // Отправляем page_view только когда страница полностью загружена
+      if (document.readyState === 'complete') {
+        gtag('event', 'page_view');
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            gtag('event', 'page_view');
+          }, 100);
+        });
+      }
+    }
+    
+    // Загружаем аналитику с задержкой или когда страница в режиме ожидания
+    if (navigator.onLine) {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGoogleAnalytics);
+      } else {
+        setTimeout(loadGoogleAnalytics, 2000); // Задержка в 2 секунды
+      }
+    } else {
+      // Если пользователь оффлайн, добавляем слушатель на восстановление соединения
+      window.addEventListener('online', loadGoogleAnalytics);
+    }
   </script>
 </body>
 </html>

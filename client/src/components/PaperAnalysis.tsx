@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { AIIcon, PlagiarismIcon } from './icons/Logo';
 
 interface MetricCardProps {
@@ -35,14 +35,29 @@ const MetricCard: React.FC<MetricCardProps> = ({ label, value, description, clas
   );
 };
 
+// Ленивая загрузка компонентов метрик для мобильных устройств
+const MobileMetrics = lazy(() => import('./paper-analysis/MobileMetrics'));
+
 const PaperAnalysis: React.FC = () => {
   const aiCardRef = useRef<HTMLDivElement>(null);
   const evidenceCardRef = useRef<HTMLDivElement>(null);
   const plagiarismCardRef = useRef<HTMLDivElement>(null);
   const criticalCardRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Определение мобильного устройства
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Начальная проверка
+    checkMobile();
+    
+    // Обработчик скролла для анимации
     const handleScroll = () => {
+      if (isMobile) return; // Отключаем тяжелые анимации на мобильных устройствах
+      
       const scrolled = window.scrollY;
       
       if (aiCardRef.current) {
@@ -58,10 +73,17 @@ const PaperAnalysis: React.FC = () => {
         criticalCardRef.current.style.transform = `translate3d(0, ${scrolled * -0.15}px, 0) scale(${window.innerWidth >= 1536 ? 1 : window.innerWidth >= 1280 ? 0.85 : window.innerWidth >= 1024 ? 0.65 : window.innerWidth >= 768 ? 0.6 : window.innerWidth >= 640 ? 0.55 : 0.45}) rotate(6deg)`;
       }
     };
-
+    
+    // Слушатели событий
+    window.addEventListener('resize', checkMobile);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    
+    // Очистка
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isMobile]);
 
   return (
     <div className="relative pt-6 w-full max-w-[1440px] mx-auto">
@@ -141,62 +163,12 @@ const PaperAnalysis: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile metrics */}
-        <div className="flex md:hidden flex-wrap gap-4 justify-center">
-          <div className="transform scale-[0.8] sm:scale-[0.85]">
-            <MetricCard
-              label="AI Content"
-              value="70%"
-              description="High AI probability"
-              className="w-[264.139px] p-[27.565px] relative"
-            >
-              <div className="absolute top-4 right-4">
-                <AIIcon className="w-[72px] h-[72px]" />
-              </div>
-            </MetricCard>
-          </div>
-          <div className="transform scale-[0.8] sm:scale-[0.85]">
-            <MetricCard
-              label="Evidence quality"
-              description="Weak supporting evidence"
-              className="w-[264.139px] p-6"
-            >
-              <svg width="170" height="19" viewBox="0 0 170 19" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1">
-                <rect x="0.626953" y="8" width="168.902" height="3.44285" rx="1.72143" fill="#E8E8E5"/>
-                <rect x="0.626953" y="8" width="118.684" height="3.44285" rx="1.72143" fill="#FED770"/>
-              </svg>
-            </MetricCard>
-          </div>
-          <div className="transform scale-[0.8] sm:scale-[0.85]">
-            <MetricCard
-              label="Plagiarism"
-              value="60%"
-              description="High risk of plagiarism"
-              className="w-[264.139px] p-[27.565px] rounded-[19.771px] border-[0.989px] border-[#E8E8E5] shadow-[0px_19.771px_59.314px_0px_rgba(203,203,203,0.30)]"
-            >
-              <div className="absolute top-8 right-4">
-                <PlagiarismIcon className="w-[72px] h-[72px]" />
-              </div>
-            </MetricCard>
-          </div>
-          <div className="transform scale-[0.8] sm:scale-[0.85]">
-            <div className="relative">
-              <MetricCard
-                label="Critical thinking"
-                value="9%"
-                description="Limited critical analysis"
-                className="flex flex-col items-start w-[240px] p-6 rounded-[17.214px] border-[0.861px] border-[#E8E8E5] shadow-[0px_20px_60px_0px_rgba(203,203,203,0.30)] rotate-3"
-              >
-                <div className="mt-3">
-                  <svg width="154" height="4" viewBox="0 0 154 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="154.144" height="3.44285" rx="1.72143" fill="#E8E8E5"/>
-                    <rect width="14.5632" height="3.44285" rx="1.72143" fill="#FF70A6"/>
-                  </svg>
-                </div>
-              </MetricCard>
-            </div>
-          </div>
-        </div>
+        {/* Mobile metrics - lazy loaded */}
+        {isMobile && (
+          <Suspense fallback={<div className="p-4 text-center">Loading metrics...</div>}>
+            <MobileMetrics />
+          </Suspense>
+        )}
       </div>
     </div>
   );
