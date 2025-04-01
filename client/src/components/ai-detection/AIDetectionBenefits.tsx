@@ -15,7 +15,7 @@ const FeatureItem: React.FC<{ icon: React.ReactNode; title: string; description:
 
 const AIDetectionBenefits: React.FC = () => {
   return (
-    <section className="py-10 bg-[#FFFFFF] border-t border-b border-[#E8E8E5]">
+    <section className="py-10 bg-[#FFFFFF] border-[#E8E8E5]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-[1240px] mx-auto">
           <FeatureItem

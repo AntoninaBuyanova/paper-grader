@@ -141,7 +141,7 @@ const AIDetector: React.FC = () => {
       </section>
 
       {/* Benefits Section с дополнительным классом для критических стилей */}
-      <section className="ai-detection-benefits">
+      <section className="ai-detection-benefits border-t border-b border-[#E8E8E5]">
         <AIDetectionBenefits />
       </section>
 
