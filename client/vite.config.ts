@@ -1,28 +1,30 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { visualizer } from 'rollup-plugin-visualizer';
 
-// Определяем, находимся ли мы в режиме production
+// Determine if we're in production mode
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default defineConfig({
   plugins: [
     react(),
-    // Добавляем визуализатор размера бандла в режиме production
+    // Add any additional plugins as needed
     ...(isProduction ? [{ name: 'rollup-plugin-visualizer' }] : [])
   ],
   build: {
-    cssCodeSplit: true,
-    cssMinify: true,
-    minify: 'terser', // Более эффективная минификация с помощью terser
+    cssCodeSplit: true, // Split CSS into chunks per page
+    cssMinify: 'lightningcss', // Use lightningcss for better CSS minification
+    minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: isProduction, // Удаляем console.log в production
+        drop_console: isProduction, // Remove console logs in production
         drop_debugger: isProduction
       }
     },
-    // Включаем CSS-оптимизацию
+    // Optimize the output
+    outDir: 'dist',
+    assetsDir: 'assets',
+    assetsInlineLimit: 4096, // Only inline assets < 4kb
     rollupOptions: {
       output: {
         manualChunks: (id) => {
@@ -39,74 +41,53 @@ export default defineConfig({
             return 'components';
           }
           
-          // Критический путь - компоненты, необходимые при первой загрузке
-          if (id.includes('/components/HeroSection') || 
-              id.includes('/components/Header') || 
-              id.includes('/components/Footer')) {
-            return 'critical';
-          }
-          
-          // Разделение по страницам и разделам
+          // Page-specific chunks
           if (id.includes('/pages/')) {
-            // Динамический импорт страниц
-            const page = id.split('/pages/')[1].split('/')[0];
-            return `page-${page}`;
-          }
-          
-          // Разделение по функциональным компонентам
-          if (id.includes('/components/ai-detection')) return 'ai-detection';
-          if (id.includes('/components/ai-paraphrasing')) return 'ai-paraphrasing';
-          if (id.includes('/components/ai-proofreading')) return 'ai-proofreading';
-          if (id.includes('/components/plagiarism-checker')) return 'plagiarism-checker';
-          
-          // UI компоненты в отдельном чанке
-          if (id.includes('/components/ui')) {
-            return 'ui-components';
+            const pageName = id.split('/pages/')[1].split('/')[0];
+            return `page-${pageName}`;
           }
         },
-        // Настройка именования файлов
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name || '';
+          
+          // CSS files: separate critical from non-critical
           if (info.endsWith('.css')) {
+            // Keep the main CSS file name consistent for cache busting
             return 'assets/[name]-[hash][extname]';
           }
           
-          // For fonts and images
+          // For fonts
           if (info.endsWith('.ttf') || info.endsWith('.otf') || 
               info.endsWith('.woff') || info.endsWith('.woff2')) {
             return 'assets/fonts/[name][extname]';
           }
           
+          // For all other assets
           return 'assets/[name]-[hash][extname]';
         },
       }
-    },
-    assetsInlineLimit: 0, // Не встраивать шрифты
-    reportCompressedSize: true, // Отчет о размере сжатых файлов
-    chunkSizeWarningLimit: 1000, // Предупреждение при больших чанках (в КБ)
+    }
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
     }
   },
+  css: {
+    postcss: './postcss.config.cjs',
+    modules: {
+      generateScopedName: isProduction ? '[hash:base64:8]' : '[local]_[hash:base64:5]',
+    },
+    // Optimize CSS processing
+    devSourcemap: true,
+  },
+  // Optimize dependencies
   optimizeDeps: {
-    exclude: ['src/fonts/*']
+    include: ['react', 'react-dom', 'react-router-dom']
   },
   server: {
     // Настройки сервера разработки
     open: false,
     hmr: true,
-  },
-  css: {
-    postcss: './postcss.config.cjs',
-    // Разделение критического и некритического CSS
-    modules: {
-      generateScopedName: isProduction ? '[hash:base64:8]' : '[local]_[hash:base64:5]',
-    },
-    // Оптимизация встроенных стилей
-    devSourcemap: true,
   },
 }); 

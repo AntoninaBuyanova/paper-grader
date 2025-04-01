@@ -24,9 +24,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   </noscript>
   
-  <!-- Critical CSS inline for faster first paint -->
-  <style>
-    /* Font declarations for all pages */
+  <!-- Use scoped critical CSS for initial render -->
+  <style id="critical-css">
+    /* Critical styles for initial render */
+    :root {
+      --font-aeonik: 'Aeonik Pro', 'Aeonik Pro Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-orbikular: 'Orbikular', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    /* Font face declarations with display:swap for better font loading */
     @font-face {
       font-family: 'Orbikular';
       src: local('Orbikular'),
@@ -34,7 +41,6 @@
       font-weight: normal;
       font-style: normal;
       font-display: swap;
-      font-synthesis: style;
     }
     
     @font-face {
@@ -44,7 +50,6 @@
       font-weight: normal;
       font-style: italic;
       font-display: swap;
-      font-synthesis: style;
     }
     
     @font-face {
@@ -64,15 +69,8 @@
       src: local('Arial');
     }
     
-    /* Font-family variables */
-    :root {
-      --font-aeonik: 'Aeonik Pro', 'Aeonik Pro Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --font-orbikular: 'Orbikular', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    
-    /* Базовые стили для быстрого отображения контента */
-    html, body {
+    /* Basic styles for faster initial render */
+    body {
       margin: 0;
       padding: 0;
       font-family: var(--font-aeonik);
@@ -80,47 +78,7 @@
       color: #334155;
     }
     
-    /* Prevent FOUC (Flash of Unstyled Content) */
-    #root {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    
-    /* When fonts are loaded, show content smoothly */
-    .fonts-loaded #root {
-      opacity: 1;
-    }
-    
-    /* Класс для Aeonik Pro */
-    .font-aeonik {
-      font-family: var(--font-aeonik);
-    }
-    
-    /* Класс для Orbikular */
-    .font-orbikular {
-      font-family: var(--font-orbikular);
-    }
-    
-    /* Класс для Inter */
-    .font-inter {
-      font-family: var(--font-inter);
-    }
-    
-    /* Critical hero styles */
-    .hero {
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
-      background-color: white;
-    }
-    
-    @media (min-width: 768px) {
-      .hero {
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-      }
-    }
-    
-    /* Critical container styles */
+    /* Critical layout classes */
     .container {
       width: 100%;
       max-width: 1200px;
@@ -130,26 +88,23 @@
       padding-right: 1rem;
     }
     
-    /* Critical header styles */
-    header {
-      width: 100%;
-      background-color: white;
-      border-bottom: 1px solid #F2F2ED;
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .text-center { text-align: center; }
+    
+    /* Prevent FOUC (Flash of Unstyled Content) with controlled opacity */
+    #root {
+      opacity: 0;
+      transition: opacity 0.2s ease;
     }
     
-    /* Critical text styles */
-    h1 {
-      margin-top: 0;
-      font-family: var(--font-orbikular);
-      font-weight: normal;
+    .critical-css-loaded #root {
+      opacity: 1;
     }
     
-    h1 em {
-      font-family: var(--font-orbikular);
-      font-style: italic;
-    }
-    
-    /* Загрузочный спиннер */
+    /* Loading spinner while critical assets load */
     .loading-spinner {
       width: 48px;
       height: 48px;
