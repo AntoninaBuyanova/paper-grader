@@ -62,6 +62,11 @@ const CriticalCSSLoader: React.FC = () => {
           font-family: var(--font-orbikular);
           font-style: italic;
         }
+
+        h2 {
+          font-family: var(--font-aeonik);
+          font-weight: 500;
+        }
       `;
 
       // Insert critical CSS if not already present
