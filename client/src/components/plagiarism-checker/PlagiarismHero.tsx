@@ -23,7 +23,7 @@ const PlagiarismHero: React.FC = () => {
           </p>
           <div className="flex justify-center mb-0 md:mb-12">
             <button className="w-[280px] md:w-auto px-6 md:px-[3.75rem] py-3 md:py-[1.125rem] bg-[#232323] text-white rounded-full text-base md:text-[20px] font-aeonik font-medium">
-              Check for Plagiarism
+              <a href="https://mystylus.ai/paper-grader/" className="text-white no-underline">Check for Plagiarism</a>
             </button>
           </div>
         </div>
