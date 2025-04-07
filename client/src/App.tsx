@@ -10,6 +10,8 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Заменяем прямые импорты на ленивую загрузку
 const Home = lazy(() => import("@/pages/Home"));
+const PTHome = lazy(() => import("@/pages/PTHome"));
+const PTBRHome = lazy(() => import("@/pages/PTBRHome"));
 const AIDetector = lazy(() => import("@/pages/AIDetector"));
 const PlagiarismChecker = lazy(() => import("./pages/PlagiarismChecker"));
 const AIProofreading = lazy(() => import("./pages/AIProofreading"));
@@ -32,6 +34,8 @@ function App() {
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/pt" element={<PTHome />} />
+            <Route path="/pt-br" element={<PTBRHome />} />
             <Route path="/ai-detector" element={<AIDetector />} />
             <Route path="/plagiarism-checker" element={<PlagiarismChecker />} />
             <Route path="/ai-proofreading" element={<AIProofreading />} />
