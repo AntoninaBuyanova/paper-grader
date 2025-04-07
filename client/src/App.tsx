@@ -12,6 +12,8 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 const Home = lazy(() => import("@/pages/Home"));
 const PTHome = lazy(() => import("@/pages/PTHome"));
 const PTBRHome = lazy(() => import("@/pages/PTBRHome"));
+const ESHome = lazy(() => import("@/pages/ESHome"));
+const ESMXHome = lazy(() => import("@/pages/ESMXHome"));
 const AIDetector = lazy(() => import("@/pages/AIDetector"));
 const PlagiarismChecker = lazy(() => import("./pages/PlagiarismChecker"));
 const AIProofreading = lazy(() => import("./pages/AIProofreading"));
@@ -36,6 +38,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/pt" element={<PTHome />} />
             <Route path="/pt-br" element={<PTBRHome />} />
+            <Route path="/es" element={<ESHome />} />
+            <Route path="/es-mx" element={<ESMXHome />} />
             <Route path="/ai-detector" element={<AIDetector />} />
             <Route path="/plagiarism-checker" element={<PlagiarismChecker />} />
             <Route path="/ai-proofreading" element={<AIProofreading />} />
