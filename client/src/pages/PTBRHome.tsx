@@ -11,6 +11,18 @@ import PTBRFooter from '@/components/pt-br/PTBRFooter';
 
 const PTBRHome: React.FC = () => {
   useEffect(() => {
+    // Update document title for Brazilian Portuguese
+    document.title = 'myStylus - Avalie e Aprimore seu Trabalho em Minutos';
+    
+    // Update meta description
+    const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
+    metaDescription.setAttribute('name', 'description');
+    metaDescription.setAttribute('content', 'O myStylus ajuda você a criar conteúdo perfeito analisando seu texto e fornecendo sugestões em tempo real para melhorar seu estilo de escrita, clareza e impacto.');
+    
+    if (!document.querySelector('meta[name="description"]')) {
+      document.head.appendChild(metaDescription);
+    }
+    
     // Smooth scrolling for anchor links
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLAnchorElement;

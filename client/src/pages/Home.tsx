@@ -11,6 +11,18 @@ import Footer from '@/components/Footer';
 
 const Home: React.FC = () => {
   useEffect(() => {
+    // Update document title for English
+    document.title = 'myStylus - Grade and Enhance Paper in Minutes';
+    
+    // Update meta description
+    const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
+    metaDescription.setAttribute('name', 'description');
+    metaDescription.setAttribute('content', 'myStylus helps you craft perfect content by analyzing your text and providing real-time suggestions to enhance your writing style, clarity, and impact.');
+    
+    if (!document.querySelector('meta[name="description"]')) {
+      document.head.appendChild(metaDescription);
+    }
+    
     // Smooth scrolling for anchor links
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLAnchorElement;

@@ -11,6 +11,18 @@ import ESMXFooter from '@/components/es-mx/ESMXFooter';
 
 const ESMXHome: React.FC = () => {
   useEffect(() => {
+    // Update document title for Mexican Spanish
+    document.title = 'myStylus - Corrige y Mejora tu Trabajo en Minutos';
+    
+    // Update meta description
+    const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
+    metaDescription.setAttribute('name', 'description');
+    metaDescription.setAttribute('content', 'myStylus te ayuda a crear contenido perfecto analizando tu texto y proporcionando sugerencias en tiempo real para mejorar tu estilo de escritura, claridad e impacto.');
+    
+    if (!document.querySelector('meta[name="description"]')) {
+      document.head.appendChild(metaDescription);
+    }
+    
     // Smooth scrolling for anchor links
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLAnchorElement;
