@@ -76,8 +76,8 @@ const ESTestimonials: React.FC = () => {
           {/* Editor Demo */}
           <div className="w-full">
             <img 
-              src="Section.png"
-              alt="Interfaz de análisis de secciones"
+              src="/Section.png"
+              alt="Interfaz de análisis de sección"
               className="w-full h-auto rounded-[20px]"
             />
           </div>

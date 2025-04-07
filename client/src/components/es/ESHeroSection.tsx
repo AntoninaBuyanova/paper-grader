@@ -10,7 +10,7 @@ const ESHeroSection: React.FC = () => {
         <div className="text-center mx-auto">
           {/* User count banner */}
           <div className="inline-flex items-center gap-2 mb-6 md:mb-8 border border-[#E8E8E5] rounded-full px-4 py-2">
-            <img src="users.png" alt="Avatares de usuarios" className="h-6 md:h-8 w-auto" />
+            <img src="/users.png" alt="Avatares de usuarios" className="h-6 md:h-8 w-auto" />
             <div className="text-sm md:text-base text-[#232323] font-aeonik">
               <span className="font-normal">Amado por </span>
               <span className="font-medium">más de 500 mil usuarios</span>

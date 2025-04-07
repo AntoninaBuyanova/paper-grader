@@ -8,7 +8,7 @@ const PTFooter: React.FC = () => {
         {/* Logo and tagline */}
         <div className="mb-16">
           <img 
-            src="Banner (2).png" 
+            src="/Banner (2).png" 
             alt="Reimagine a Palavra - Plataforma Inteligente para Escrita e Pesquisa" 
             className="h-auto max-w-[550px] w-full"
           />

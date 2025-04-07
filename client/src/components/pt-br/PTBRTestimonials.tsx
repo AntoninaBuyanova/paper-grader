@@ -76,7 +76,7 @@ const PTBRTestimonials: React.FC = () => {
           {/* Editor Demo */}
           <div className="w-full">
             <img 
-              src="Section.png"
+              src="/Section.png"
               alt="Interface de análise de seção"
               className="w-full h-auto rounded-[20px]"
             />

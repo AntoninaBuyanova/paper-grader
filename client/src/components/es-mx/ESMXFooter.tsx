@@ -8,7 +8,7 @@ const ESMXFooter: React.FC = () => {
         {/* Logo and tagline */}
         <div className="mb-16">
           <img 
-            src="Banner (2).png" 
+            src="/Banner (2).png" 
             alt="Reimagina la Palabra - Plataforma Inteligente para Escritura e Investigación" 
             className="h-auto max-w-[550px] w-full"
           />

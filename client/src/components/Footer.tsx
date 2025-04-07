@@ -8,8 +8,8 @@ const Footer: React.FC = () => {
         {/* Logo and tagline */}
         <div className="mb-16">
           <img 
-            src="Banner (2).png" 
-            alt="Reimagine the Word - Intelligent Platform for Writing and Research" 
+            src="/Banner (2).png" 
+            alt="Reimagine the Word - Smart Platform for Writing and Research" 
             className="h-auto max-w-[550px] w-full"
           />
         </div>

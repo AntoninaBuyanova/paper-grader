@@ -53,7 +53,7 @@ const ESFeatures: React.FC = () => {
             <div className="relative w-full lg:w-[500px] ml-auto mt-0 lg:mt-0">
               {/* Main image */}
               <img 
-                src="student-laptop.png"
+                src="/student-laptop.png"
                 alt="Estudiante trabajando en laptop"
                 className="rounded-3xl w-full"
               />

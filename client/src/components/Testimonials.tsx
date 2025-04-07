@@ -76,7 +76,7 @@ const Testimonials: React.FC = () => {
           {/* Editor Demo */}
           <div className="w-full">
             <img 
-              src="Section.png"
+              src="/Section.png"
               alt="Section analysis interface"
               className="w-full h-auto rounded-[20px]"
             />
