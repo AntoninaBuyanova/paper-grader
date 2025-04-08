@@ -21,7 +21,15 @@ const AIDetectorES = lazy(() => import("@/pages/AIDetectorES"));
 const AIDetectorESMX = lazy(() => import("@/pages/AIDetectorESMX"));
 const PlagiarismChecker = lazy(() => import("./pages/PlagiarismChecker"));
 const AIProofreading = lazy(() => import("./pages/AIProofreading"));
+const AIProofreadingPT = lazy(() => import("./pages/AIProofreadingPT"));
+const AIProofreadingPTBR = lazy(() => import("./pages/AIProofreadingPTBR"));
+const AIProofreadingES = lazy(() => import("./pages/AIProofreadingES"));
+const AIProofreadingESMX = lazy(() => import("./pages/AIProofreadingESMX"));
 const AIParaphrasing = lazy(() => import("./pages/AIParaphrasing"));
+const AIParaphrasingPT = lazy(() => import("./pages/AIParaphrasingPT"));
+const AIParaphrasingPTBR = lazy(() => import("./pages/AIParaphrasingPTBR"));
+const AIParaphrasingES = lazy(() => import("./pages/AIParaphrasingES"));
+const AIParaphrasingESMX = lazy(() => import("./pages/AIParaphrasingESMX"));
 
 // Компонент загрузки для Suspense
 const LoadingFallback = () => (
@@ -51,7 +59,15 @@ function App() {
             <Route path="/ai-detector/es-mx" element={<AIDetectorESMX />} />
             <Route path="/plagiarism-checker" element={<PlagiarismChecker />} />
             <Route path="/ai-proofreading" element={<AIProofreading />} />
+            <Route path="/ai-proofreading/pt" element={<AIProofreadingPT />} />
+            <Route path="/ai-proofreading/pt-br" element={<AIProofreadingPTBR />} />
+            <Route path="/ai-proofreading/es" element={<AIProofreadingES />} />
+            <Route path="/ai-proofreading/es-mx" element={<AIProofreadingESMX />} />
             <Route path="/ai-paraphrasing-tool" element={<AIParaphrasing />} />
+            <Route path="/ai-paraphrasing-tool/pt" element={<AIParaphrasingPT />} />
+            <Route path="/ai-paraphrasing-tool/pt-br" element={<AIParaphrasingPTBR />} />
+            <Route path="/ai-paraphrasing-tool/es" element={<AIParaphrasingES />} />
+            <Route path="/ai-paraphrasing-tool/es-mx" element={<AIParaphrasingESMX />} />
             {/* Fallback to 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
