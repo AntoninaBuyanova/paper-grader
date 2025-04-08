@@ -38,4 +38,3 @@ yarn-error.log*
 server/public
 vite.config.ts.*
 *.tar.gz
-.vercel

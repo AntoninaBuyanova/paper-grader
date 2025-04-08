@@ -1,0 +1,43 @@
+# Ignore development and local files
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.pnp
+.pnp.js
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore git and CI related files
+.git
+.github
+.gitignore
+**/.git
+**/.gitignore
+README.md
+CHANGELOG.md
+LICENSE
+.gitlab-ci.yml
+.travis.yml
+.circleci
+
+# Ignore build artifacts and cache
+dist
+build
+coverage
+.cache
+.npm
+.eslintcache
+
+# Ignore editor specific files
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Ignore Docker related files
+Dockerfile
+.dockerignore 

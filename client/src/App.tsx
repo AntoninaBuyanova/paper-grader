@@ -5,8 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import { lazy, Suspense } from 'react';
 import StyleLoader from '@/components/StyleLoader';
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Заменяем прямые импорты на ленивую загрузку
 const Home = lazy(() => import("@/pages/Home"));
@@ -82,8 +80,6 @@ function App() {
         </Suspense>
       </Router>
       <Toaster />
-      <Analytics />
-      <SpeedInsights />
     </QueryClientProvider>
   );
 }
