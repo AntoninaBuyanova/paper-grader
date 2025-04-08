@@ -8,7 +8,7 @@
     "build": "tsc && vite build && npm run compress-assets",
     "compress-assets": "cd dist/public && (find assets -name '*.js' -o -name '*.css' | xargs -I {} gzip -k9 \"{}\") && cd ../.. && node scripts/compress.js",
     "preview": "vite preview",
-    "start": "node dist/index.js",
+    "start": "node server.js",
     "check": "tsc",
     "db:push": "drizzle-kit push",
     "railway:prepare": "npm install && npm run build",

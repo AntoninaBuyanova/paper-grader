@@ -10,6 +10,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Add a health check endpoint
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).send('OK');
+});
+
 // Enable compression for all responses
 app.use(compression({
   level: 6, // Compression level (1-9, where 9 is best compression but slowest)
