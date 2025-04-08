@@ -20,6 +20,10 @@ const AIDetectorPTBR = lazy(() => import("@/pages/AIDetectorPTBR"));
 const AIDetectorES = lazy(() => import("@/pages/AIDetectorES"));
 const AIDetectorESMX = lazy(() => import("@/pages/AIDetectorESMX"));
 const PlagiarismChecker = lazy(() => import("./pages/PlagiarismChecker"));
+const PlagiarismCheckerPT = lazy(() => import("./pages/PlagiarismCheckerPT"));
+const PlagiarismCheckerPTBR = lazy(() => import("./pages/PlagiarismCheckerPTBR"));
+const PlagiarismCheckerES = lazy(() => import("./pages/PlagiarismCheckerES"));
+const PlagiarismCheckerESMX = lazy(() => import("./pages/PlagiarismCheckerESMX"));
 const AIProofreading = lazy(() => import("./pages/AIProofreading"));
 const AIProofreadingPT = lazy(() => import("./pages/AIProofreadingPT"));
 const AIProofreadingPTBR = lazy(() => import("./pages/AIProofreadingPTBR"));
@@ -58,6 +62,10 @@ function App() {
             <Route path="/ai-detector/es" element={<AIDetectorES />} />
             <Route path="/ai-detector/es-mx" element={<AIDetectorESMX />} />
             <Route path="/plagiarism-checker" element={<PlagiarismChecker />} />
+            <Route path="/plagiarism-checker/pt" element={<PlagiarismCheckerPT />} />
+            <Route path="/plagiarism-checker/pt-br" element={<PlagiarismCheckerPTBR />} />
+            <Route path="/plagiarism-checker/es" element={<PlagiarismCheckerES />} />
+            <Route path="/plagiarism-checker/es-mx" element={<PlagiarismCheckerESMX />} />
             <Route path="/ai-proofreading" element={<AIProofreading />} />
             <Route path="/ai-proofreading/pt" element={<AIProofreadingPT />} />
             <Route path="/ai-proofreading/pt-br" element={<AIProofreadingPTBR />} />
