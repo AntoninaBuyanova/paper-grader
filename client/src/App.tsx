@@ -17,6 +17,8 @@ const ESMXHome = lazy(() => import("@/pages/ESMXHome"));
 const AIDetector = lazy(() => import("@/pages/AIDetector"));
 const AIDetectorPT = lazy(() => import("@/pages/AIDetectorPT"));
 const AIDetectorPTBR = lazy(() => import("@/pages/AIDetectorPTBR"));
+const AIDetectorES = lazy(() => import("@/pages/AIDetectorES"));
+const AIDetectorESMX = lazy(() => import("@/pages/AIDetectorESMX"));
 const PlagiarismChecker = lazy(() => import("./pages/PlagiarismChecker"));
 const AIProofreading = lazy(() => import("./pages/AIProofreading"));
 const AIParaphrasing = lazy(() => import("./pages/AIParaphrasing"));
@@ -45,6 +47,8 @@ function App() {
             <Route path="/ai-detector" element={<AIDetector />} />
             <Route path="/ai-detector/pt" element={<AIDetectorPT />} />
             <Route path="/ai-detector/pt-br" element={<AIDetectorPTBR />} />
+            <Route path="/ai-detector/es" element={<AIDetectorES />} />
+            <Route path="/ai-detector/es-mx" element={<AIDetectorESMX />} />
             <Route path="/plagiarism-checker" element={<PlagiarismChecker />} />
             <Route path="/ai-proofreading" element={<AIProofreading />} />
             <Route path="/ai-paraphrasing-tool" element={<AIParaphrasing />} />
