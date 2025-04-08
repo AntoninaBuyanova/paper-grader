@@ -1,7 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { LinkedInIcon, TwitterIcon, InstagramIcon, YoutubeIcon, FacebookIcon } from './icons/Logo';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Footer: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+
+  useEffect(() => {
+    // Set the initial language based on the URL path
+    const path = location.pathname;
+    if (path.includes('/pt-br')) {
+      setSelectedLanguage('pt-br');
+    } else if (path.includes('/pt')) {
+      setSelectedLanguage('pt');
+    } else if (path.includes('/es-mx')) {
+      setSelectedLanguage('es-mx');
+    } else if (path.includes('/es')) {
+      setSelectedLanguage('es');
+    } else {
+      setSelectedLanguage('en');
+    }
+  }, [location.pathname]);
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const lang = e.target.value;
+    setSelectedLanguage(lang);
+    
+    // Extract the current page path without the language prefix
+    let currentPath = location.pathname;
+    const langPrefixes = ['/pt-br', '/pt', '/es-mx', '/es'];
+    for (const prefix of langPrefixes) {
+      if (currentPath.startsWith(prefix)) {
+        currentPath = currentPath.substring(prefix.length) || '/';
+        break;
+      }
+    }
+    
+    // If we're at the root, we need special handling
+    if (currentPath === '/') {
+      if (lang === 'en') {
+        navigate('/');
+      } else {
+        navigate(`/${lang}`);
+      }
+      return;
+    }
+    
+    // Navigate to the selected language version of the current page
+    if (lang === 'en') {
+      navigate(currentPath);
+    } else {
+      navigate(`/${lang}${currentPath}`);
+    }
+  };
+
   return (
     <footer className="py-20 bg-[#F8F8F3] font-aeonik">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,15 +102,31 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Follow Us */}
+          {/* Follow Us and Language Selector */}
           <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="font-medium mb-4 font-aeonik">Follow Us</h3>
-            <div className="flex gap-4 flex-wrap">
+            <div className="flex gap-4 flex-wrap mb-6">
               <a href="https://www.linkedin.com/company/mystylus-ai/" className="text-[#232323] hover:opacity-70"><LinkedInIcon className="w-6 h-6" /></a>
               <a href="https://x.com/stylusai/" className="text-[#232323] hover:opacity-70"><TwitterIcon className="w-6 h-6" /></a>
               <a href="https://www.instagram.com/mystylus.ai/" className="text-[#232323] hover:opacity-70"><InstagramIcon className="w-6 h-6" /></a>
               <a href="https://www.youtube.com/@mystylus" className="text-[#232323] hover:opacity-70"><YoutubeIcon className="w-6 h-6" /></a>
               <a href="https://www.facebook.com/mystylusai/" className="text-[#232323] hover:opacity-70"><FacebookIcon className="w-6 h-6" /></a>
+            </div>
+            
+            {/* Language Selector */}
+            <div>
+              <h3 className="font-medium mb-2 font-aeonik">Language</h3>
+              <select 
+                value={selectedLanguage}
+                onChange={handleLanguageChange}
+                className="w-full p-2 border border-[#E8E8E5] rounded-md bg-white text-[#232323] font-aeonik focus:outline-none focus:ring-2 focus:ring-[#232323]"
+              >
+                <option value="en">English</option>
+                <option value="pt">Portuguese</option>
+                <option value="pt-br">Brazilian Portuguese</option>
+                <option value="es">Spanish</option>
+                <option value="es-mx">Mexican Spanish</option>
+              </select>
             </div>
           </div>
         </div>
