@@ -3,7 +3,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Features from '@/components/Features';
 import Testimonials from '@/components/Testimonials';
-import Pricing from '@/components/Pricing';
 import HowItWorks from '@/components/HowItWorks';
 import CTA from '@/components/CTA';
 import AIDetectionHero from '../components/ai-detection/AIDetectionHero';
@@ -163,7 +162,6 @@ const AIDetector: React.FC = () => {
         </div>
 
         <Testimonials />
-        <Pricing />
         <HowItWorks />
 
         {/* FAQ Section */}

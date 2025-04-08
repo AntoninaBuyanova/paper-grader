@@ -3,7 +3,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Features from '@/components/Features';
 import Testimonials from '@/components/Testimonials';
-import Pricing from '@/components/Pricing';
 import HowItWorks from '@/components/HowItWorks';
 import CTA from '@/components/CTA';
 import PlagiarismHero from '../components/plagiarism-checker/PlagiarismHero';
@@ -52,7 +51,6 @@ const PlagiarismChecker: React.FC = () => {
         <Features />
         <PlagiarismComparison />
         <Testimonials />
-        <Pricing />
         <HowItWorks />
         <PlagiarismFAQ />
         <CTA />

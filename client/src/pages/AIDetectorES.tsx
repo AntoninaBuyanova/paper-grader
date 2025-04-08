@@ -3,7 +3,6 @@ import ESHeader from '@/components/es/ESHeader';
 import ESFooter from '@/components/es/ESFooter';
 import ESFeatures from '@/components/es/ESFeatures';
 import ESTestimonials from '@/components/es/ESTestimonials';
-import ESPricing from '@/components/es/ESPricing';
 import ESHowItWorks from '@/components/es/ESHowItWorks';
 import ESCTA from '@/components/es/ESCTA';
 import AIDetectionHeroES from '@/components/ai-detector-es/AIDetectionHeroES';
@@ -163,7 +162,6 @@ const AIDetectorES: React.FC = () => {
         </div>
 
         <ESTestimonials />
-        <ESPricing />
         <ESHowItWorks />
 
         {/* Sección FAQ */}

@@ -3,7 +3,6 @@ import Header from '@/components/pt-br/PTBRHeader';
 import Footer from '@/components/pt-br/PTBRFooter';
 import Features from '@/components/pt-br/PTBRFeatures';
 import Testimonials from '@/components/pt-br/PTBRTestimonials';
-import Pricing from '@/components/pt-br/PTBRPricing';
 import HowItWorks from '@/components/pt-br/PTBRHowItWorks';
 import CTA from '@/components/pt-br/PTBRCTA';
 import AIDetectionHeroPTBR from '@/components/ai-detector-pt-br/AIDetectionHeroPTBR';
@@ -162,7 +161,6 @@ const AIDetectorPTBR: React.FC = () => {
         </div>
 
         <Testimonials />
-        <Pricing />
         <HowItWorks />
 
         {/* FAQ Section */}

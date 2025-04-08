@@ -3,7 +3,6 @@ import ESMXHeader from '@/components/es-mx/ESMXHeader';
 import ESMXFooter from '@/components/es-mx/ESMXFooter';
 import ESMXFeatures from '@/components/es-mx/ESMXFeatures';
 import ESMXTestimonials from '@/components/es-mx/ESMXTestimonials';
-import ESMXPricing from '@/components/es-mx/ESMXPricing';
 import ESMXHowItWorks from '@/components/es-mx/ESMXHowItWorks';
 import ESMXCTA from '@/components/es-mx/ESMXCTA';
 import AIDetectionHeroESMX from '../components/ai-detector-es-mx/AIDetectionHeroESMX';
@@ -163,7 +162,6 @@ const AIDetectorESMX: React.FC = () => {
         </div>
 
         <ESMXTestimonials />
-        <ESMXPricing />
         <ESMXHowItWorks />
 
         {/* Sección FAQ */}

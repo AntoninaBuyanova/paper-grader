@@ -3,7 +3,6 @@ import Header from '@/components/pt/PTHeader';
 import Footer from '@/components/pt/PTFooter';
 import Features from '@/components/pt/PTFeatures';
 import Testimonials from '@/components/pt/PTTestimonials';
-import Pricing from '@/components/pt/PTPricing';
 import HowItWorks from '@/components/pt/PTHowItWorks';
 import CTA from '@/components/pt/PTCTA';
 import AIDetectionHeroPT from '@/components/ai-detector-pt/AIDetectionHeroPT';
@@ -162,7 +161,6 @@ const AIDetectorPT: React.FC = () => {
         </div>
 
         <Testimonials />
-        <Pricing />
         <HowItWorks />
 
         {/* FAQ Section */}
