@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from './icons/Logo';
+import { appendUtmParams } from '../utils/utm';
 
 const Header: React.FC = () => {
   return (
@@ -8,14 +9,14 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4 max-w-[1240px] mx-auto">
           {/* Logo */}
           <div className="w-[100px] md:w-[145px]">
-            <a href="https://mystylus.ai/">
+            <a href={appendUtmParams("https://mystylus.ai/")}>
               <Logo />
             </a>
           </div>
           
           {/* Get Started Button */}
           <a 
-            href="https://mystylus.ai/paper-grader/" 
+            href={appendUtmParams("https://mystylus.ai/paper-grader/")}
             className="px-10 py-4 rounded-full bg-[#E9FF70] text-black font-aeonik font-medium hover:bg-[#dff566] transition-colors"
           >
             Get Started

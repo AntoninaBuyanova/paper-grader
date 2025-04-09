@@ -1,5 +1,6 @@
 import React from 'react';
 import { Check } from 'lucide-react';
+import { appendUtmParams } from '../utils/utm';
 
 interface PricingFeature {
   text: string;
@@ -121,7 +122,7 @@ const Pricing: React.FC = () => {
               </div>
             </div>
 
-            <a href="https://mystylus.ai/paper-grader/" className="no-underline">
+            <a href={appendUtmParams("https://mystylus.ai/paper-grader/")} className="no-underline">
               <button className="w-full lg:w-auto py-4 lg:py-[1.125rem] px-6 lg:px-[3.75rem] bg-[#232323] text-white rounded-full text-lg lg:text-[1.25rem] font-medium">
                 Add citations
               </button>

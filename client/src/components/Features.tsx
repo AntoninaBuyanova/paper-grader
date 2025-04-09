@@ -1,5 +1,6 @@
 import React from 'react';
 import { Check, Lightbulb, ClipboardList, PieChart, AlertCircle } from 'lucide-react';
+import { appendUtmParams } from '../utils/utm';
 
 const FeatureCard: React.FC<{
   icon: React.ReactNode;
@@ -42,7 +43,7 @@ const Features: React.FC = () => {
               <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 font-aeonik">
                 Get detailed academic feedback and improve it with expert-level insights
               </p>
-              <a href="https://mystylus.ai/paper-grader/" className="no-underline">
+              <a href={appendUtmParams("https://mystylus.ai/paper-grader/")} className="no-underline">
                 <button className="hidden lg:block px-[3.75rem] py-[1.125rem] bg-[#232323] text-white rounded-full text-lg font-aeonik font-medium">
                   Check my paper
                 </button>
@@ -91,7 +92,7 @@ const Features: React.FC = () => {
             
             {/* Mobile Check my paper button */}
             <div className="block lg:hidden mt-8">
-              <a href="https://mystylus.ai/paper-grader/" className="no-underline">
+              <a href={appendUtmParams("https://mystylus.ai/paper-grader/")} className="no-underline">
                 <button className="w-full px-[3.75rem] py-[1.125rem] bg-[#232323] text-white rounded-full text-lg font-aeonik font-medium">
                   Check my paper
                 </button>

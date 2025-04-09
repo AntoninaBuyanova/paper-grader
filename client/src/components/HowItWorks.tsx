@@ -1,4 +1,5 @@
 import React from 'react';
+import { appendUtmParams } from '../utils/utm';
 
 const StepCard: React.FC<{
   number: number;
@@ -14,7 +15,7 @@ const StepCard: React.FC<{
       <h3 className="text-2xl font-aeonik font-medium mb-3 text-[#3C3C3C]">{title}</h3>
       <p className="text-[#3C3C3C]">{description}</p>
       {isHighlighted && (
-        <a href="https://mystylus.ai/paper-grader/" className="no-underline">
+        <a href={appendUtmParams("https://mystylus.ai/paper-grader/")} className="no-underline">
           <button className="mt-6 px-6 py-3 bg-[#232323] text-[#FFFFFF] text-base rounded-full font-aeonik font-medium">
             Get started
           </button>
