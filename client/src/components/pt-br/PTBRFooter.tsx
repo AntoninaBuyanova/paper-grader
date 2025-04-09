@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { LinkedInIcon, TwitterIcon, InstagramIcon, YoutubeIcon, FacebookIcon } from '../icons/Logo';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { appendUtmParams } from '../../utils/utm';
 
 const PTBRFooter: React.FC = () => {
   const navigate = useNavigate();
@@ -25,6 +26,25 @@ const PTBRFooter: React.FC = () => {
     }
   }, [location.pathname]);
 
+  // Get UTM parameters from the current URL
+  const getUtmParamsString = (): string => {
+    if (typeof window === 'undefined') return '';
+    
+    const searchParams = new URLSearchParams(window.location.search);
+    const utmParams = new URLSearchParams();
+    
+    // Extract UTM parameters
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(param => {
+      const value = searchParams.get(param);
+      if (value) {
+        utmParams.append(param, value);
+      }
+    });
+    
+    const utmString = utmParams.toString();
+    return utmString ? `?${utmString}` : '';
+  };
+
   const handleLanguageSelect = (lang: string) => {
     setSelectedLanguage(lang);
     setIsDropdownOpen(false);
@@ -38,6 +58,9 @@ const PTBRFooter: React.FC = () => {
         break;
       }
     }
+    
+    // Get UTM parameters from current URL
+    const utmParams = getUtmParamsString();
     
     // Special handling for specific tool pages with language as suffix
     const specificPaths = ['/plagiarism-checker', '/ai-paraphrasing-tool', '/AI-Detector', '/ai-proofreading'];
@@ -55,9 +78,9 @@ const PTBRFooter: React.FC = () => {
         ) || currentPath;
         
         if (lang === 'en') {
-          navigate(basePath);
+          navigate(`${basePath}${utmParams}`);
         } else {
-          navigate(`${basePath}/${lang}`);
+          navigate(`${basePath}/${lang}${utmParams}`);
         }
         return;
       }
@@ -66,18 +89,18 @@ const PTBRFooter: React.FC = () => {
     // If we're at the root, we need special handling
     if (currentPath === '/') {
       if (lang === 'en') {
-        navigate('/');
+        navigate(`/${utmParams}`);
       } else {
-        navigate(`/${lang}`);
+        navigate(`/${lang}${utmParams}`);
       }
       return;
     }
     
     // Navigate to the selected language version of the current page
     if (lang === 'en') {
-      navigate(currentPath);
+      navigate(`${currentPath}${utmParams}`);
     } else {
-      navigate(`/${lang}${currentPath}`);
+      navigate(`/${lang}${currentPath}${utmParams}`);
     }
   };
 
@@ -182,10 +205,10 @@ const PTBRFooter: React.FC = () => {
           <div>
             <h3 className="font-medium mb-3 sm:mb-4 font-aeonik text-base sm:text-lg">Empresa</h3>
             <ul className="space-y-2 sm:space-y-3">
-              <li><a href="https://mystylus.ai/terms-conditions/" className="text-[#232323] hover:opacity-70 font-aeonik">Termos de uso</a></li>
-              <li><a href="https://mystylus.ai/privacy-policy/" className="text-[#232323] hover:opacity-70 font-aeonik">Política de cookies e privacidade</a></li>
-              <li><a href="https://mystylus.ai/about-us/" className="text-[#232323] hover:opacity-70 font-aeonik">Quem somos</a></li>
-              <li><a href="https://mystylus.ai/affiliate-program/" className="text-[#232323] hover:opacity-70 font-aeonik">Programa de Afiliados</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/terms-conditions/")} className="text-[#232323] hover:opacity-70 font-aeonik">Termos de uso</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/privacy-policy/")} className="text-[#232323] hover:opacity-70 font-aeonik">Política de cookies e privacidade</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/about-us/")} className="text-[#232323] hover:opacity-70 font-aeonik">Quem somos</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/affiliate-program/")} className="text-[#232323] hover:opacity-70 font-aeonik">Programa de Afiliados</a></li>
             </ul>
           </div>
 
@@ -193,10 +216,10 @@ const PTBRFooter: React.FC = () => {
           <div>
             <h3 className="font-medium mb-3 sm:mb-4 font-aeonik text-base sm:text-lg">Ferramentas de IA</h3>
             <ul className="space-y-2 sm:space-y-3">
-              <li><a href="https://mystylus.ai/paragraph-generator/" className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Parágrafos</a></li>
-              <li><a href="https://mystylus.ai/ai-paper-generator/" className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Trabalhos Acadêmicos</a></li>
-              <li><a href="https://mystylus.ai/ai-story-generator/" className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Histórias</a></li>
-              <li><a href="https://mystylus.ai/thesis-statement-generator/" className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Tese: Experimente</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/paragraph-generator/")} className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Parágrafos</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/ai-paper-generator/")} className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Trabalhos Acadêmicos</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/ai-story-generator/")} className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Histórias</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/thesis-statement-generator/")} className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Tese: Experimente</a></li>
             </ul>
           </div>
 
@@ -204,10 +227,10 @@ const PTBRFooter: React.FC = () => {
           <div>
             <h3 className="font-medium mb-3 sm:mb-4 font-aeonik text-base sm:text-lg">Ferramentas de Escrita</h3>
             <ul className="space-y-2 sm:space-y-3">
-              <li><a href="https://mystylus.ai/ai-essay-writer/" className="text-[#232323] hover:opacity-70 font-aeonik">Assistente de Redação</a></li>
-              <li><a href="https://mystylus.ai/essay-title-generator/" className="text-[#232323] hover:opacity-70 font-aeonik">Criador de Títulos</a></li>
-              <li><a href="https://mystylus.ai/paraphrase-tool/" className="text-[#232323] hover:opacity-70 font-aeonik">Ferramenta de Paráfrase</a></li>
-              <li><a href="https://mystylus.ai/ai-literature-review-generator/" className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Revisão Bibliográfica</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/ai-essay-writer/")} className="text-[#232323] hover:opacity-70 font-aeonik">Assistente de Redação</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/essay-title-generator/")} className="text-[#232323] hover:opacity-70 font-aeonik">Criador de Títulos</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/paraphrase-tool/")} className="text-[#232323] hover:opacity-70 font-aeonik">Ferramenta de Paráfrase</a></li>
+              <li><a href={appendUtmParams("https://mystylus.ai/ai-literature-review-generator/")} className="text-[#232323] hover:opacity-70 font-aeonik">Gerador de Revisão Bibliográfica</a></li>
             </ul>
           </div>
 
@@ -215,11 +238,11 @@ const PTBRFooter: React.FC = () => {
           <div>
             <h3 className="font-medium mb-3 sm:mb-4 font-aeonik text-base sm:text-lg">Siga a gente</h3>
             <div className="flex gap-4 flex-wrap mb-6">
-              <a href="https://www.linkedin.com/company/mystylus-ai/" className="text-[#232323] hover:opacity-70"><LinkedInIcon className="w-6 h-6" /></a>
-              <a href="https://x.com/stylusai/" className="text-[#232323] hover:opacity-70"><TwitterIcon className="w-6 h-6" /></a>
-              <a href="https://www.instagram.com/mystylus.ai/" className="text-[#232323] hover:opacity-70"><InstagramIcon className="w-6 h-6" /></a>
-              <a href="https://www.youtube.com/@mystylus" className="text-[#232323] hover:opacity-70"><YoutubeIcon className="w-6 h-6" /></a>
-              <a href="https://www.facebook.com/mystylusai/" className="text-[#232323] hover:opacity-70"><FacebookIcon className="w-6 h-6" /></a>
+              <a href={appendUtmParams("https://www.linkedin.com/company/mystylus-ai/")} className="text-[#232323] hover:opacity-70"><LinkedInIcon className="w-6 h-6" /></a>
+              <a href={appendUtmParams("https://x.com/stylusai/")} className="text-[#232323] hover:opacity-70"><TwitterIcon className="w-6 h-6" /></a>
+              <a href={appendUtmParams("https://www.instagram.com/mystylus.ai/")} className="text-[#232323] hover:opacity-70"><InstagramIcon className="w-6 h-6" /></a>
+              <a href={appendUtmParams("https://www.youtube.com/@mystylus")} className="text-[#232323] hover:opacity-70"><YoutubeIcon className="w-6 h-6" /></a>
+              <a href={appendUtmParams("https://www.facebook.com/mystylusai/")} className="text-[#232323] hover:opacity-70"><FacebookIcon className="w-6 h-6" /></a>
             </div>
           </div>
         </div>
@@ -231,7 +254,7 @@ const PTBRFooter: React.FC = () => {
             <div className="flex flex-wrap gap-2">
               <a href="mailto:info@myStylus.ai" className="hover:opacity-70 font-medium">info@myStylus.ai</a>
               <span className="hidden sm:inline mx-2">•</span>
-              <a href="https://mystylus.ai/privacy-policy/" className="hover:opacity-70 font-medium">Política de privacidade</a>
+              <a href={appendUtmParams("https://mystylus.ai/privacy-policy/")} className="hover:opacity-70 font-medium">Política de privacidade</a>
             </div>
           </div>
           <div className="md:col-start-3 md:col-span-2 flex flex-col">
