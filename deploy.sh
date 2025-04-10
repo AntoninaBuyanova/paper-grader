@@ -3,18 +3,11 @@
 # Exit on error
 set -e
 
-echo "🚀 Starting Vercel deployment process..."
+echo "🚀 Starting frontend deployment process..."
 
 # Move to client directory
 echo "📂 Moving to client directory..."
 cd client
-
-# Check if Vercel CLI is installed
-if ! command -v vercel &> /dev/null
-then
-    echo "⚙️ Installing Vercel CLI..."
-    npm install -g vercel
-fi
 
 # Install dependencies
 echo "📦 Installing dependencies..."
@@ -24,8 +17,11 @@ npm install
 echo "🏗️ Building the application..."
 npm run build
 
-# Deploy to Vercel
-echo "🚀 Deploying to Vercel production..."
-vercel --prod
+echo "✅ Build completed!"
 
-echo "✅ Deployment completed!" 
+# Instructions for deploying to various static hosting providers
+echo "To deploy the frontend, you can use one of these options:"
+echo "1. Netlify: netlify deploy --prod --dir=dist"
+echo "2. GitHub Pages: Upload the dist directory to your gh-pages branch"
+echo "3. Firebase: firebase deploy --only hosting"
+echo "4. Any static hosting provider: Upload the contents of the dist directory" 
